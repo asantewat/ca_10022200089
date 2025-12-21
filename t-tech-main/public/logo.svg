@@ -1,0 +1,17 @@
+<svg width="320" height="120" viewBox="0 0 320 120" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0%" stop-color="#22c55e" />
+      <stop offset="100%" stop-color="#06b6d4" />
+    </linearGradient>
+  </defs>
+  <rect width="320" height="120" rx="12" fill="#fff" />
+  <g transform="translate(12,12)">
+    <rect width="96" height="96" rx="12" fill="url(#g1)" />
+    <text x="54" y="62" font-family="Inter, Arial, sans-serif" font-size="44" font-weight="700" fill="#ffffff" text-anchor="middle">T</text>
+  </g>
+  <g transform="translate(120,32)">
+    <text x="0" y="24" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700" fill="#0f172a">T-Tech</text>
+    <text x="0" y="54" font-family="Inter, Arial, sans-serif" font-size="14" font-weight="600" fill="#0f172a">&amp; Appliances</text>
+  </g>
+</svg>

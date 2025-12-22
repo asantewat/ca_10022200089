@@ -1,12 +1,10 @@
-# 🛍️ T-Tech & Appliances - Complete Full-Stack E-Commerce Platform
+# 🛍️ T-Tech & Appliances - Completed E-Commerce Platform
 
-## ✅ **FINISHED & DEPLOYMENT READY**
+## ✅ **FINISHED & DEPLOYED**
 
 A production-ready, full-stack e-commerce application for T-Tech & Appliances, built with **Next.js 15+**, **MongoDB**, and **TypeScript**.
 
-**🎉 Successfully transformed from mock frontend to complete full-stack application!**
-
-## ✨ Features
+## Features
 
 ### 🔐 Authentication
 
@@ -141,7 +139,7 @@ A production-ready, full-stack e-commerce application for T-Tech & Appliances, b
 ### Prerequisites
 
 - Node.js 18+ installed
-- npm or pnpm package manager
+- npm (node package manager)
 
 ### Installation
 
@@ -157,16 +155,12 @@ A production-ready, full-stack e-commerce application for T-Tech & Appliances, b
 
    ```bash
    npm install
-   # or
-   pnpm install
    ```
 
 3. **Start the development server**
 
    ```bash
    npm run dev
-   # or
-   pnpm dev
    ```
 
 4. **Open your browser**
@@ -232,18 +226,14 @@ Then refresh the page.
 
 ```bash
 npm run build
-# or
-pnpm build
 ```
 
 ### Deployment Platforms
 
 This app can be deployed to:
 
-- **Vercel**: `vercel deploy`
-- **Netlify**: Drag & drop the `dist` folder
-- **GitHub Pages**: Configure in repository settings
-- **Any static hosting service**
+- **Netlify**
+
 
 ## 🔒 Security Notes
 
@@ -327,13 +317,5 @@ ordersAPI.updateStatus(id: string, status: OrderStatus, token: string): Promise<
 ## 📄 License
 
 MIT License - feel free to use this project for learning or as a foundation for your own e-commerce application.
-
-## 🙏 Acknowledgments
-
-- Product images from Unsplash
-- UI components from Radix UI
-- Icons from Lucide React
-
----
 
 **Built with ❤️ using React and TypeScript**

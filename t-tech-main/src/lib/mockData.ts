@@ -12,7 +12,6 @@ export const initialProducts: Product[] = [
     countInStock: 50,
     rating: 4.5,
     numReviews: 128,
-    image: 'https://picsum.photos/seed/headphones/800/600',
     image: 'https://images.unsplash.com/photo-1518444022651-7d2d5d7767dc?w=800&q=80&auto=format&fit=crop&crop=entropy',
     createdAt: new Date('2024-01-15'),
     updatedAt: new Date('2024-01-15'),

@@ -2,7 +2,8 @@
 
 ## ✅ **FINISHED & DEPLOYED**
 
-A production-ready, full-stack e-commerce application for T-Tech & Appliances, built with **Next.js 15+**, **MongoDB**, and **TypeScript**.
+A production-ready, deployed, full-stack e-commerce application for T-Tech & Appliances, built with **Next.js 15+**, **MongoDB**, and **TypeScript**.
+Deployed website: https://t-tech-and-appliances.netlify.app/
 
 ## Features
 

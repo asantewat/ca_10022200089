@@ -149,7 +149,8 @@ A production-ready, full-stack e-commerce application for T-Tech & Appliances, b
 
    ```bash
    git clone <your-repo-url>
-  cd t-tech-appliances
+  cd t-tech-2
+  cd t-tech-main
    ```
 
 2. **Install dependencies**

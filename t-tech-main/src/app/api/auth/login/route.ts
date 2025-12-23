@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { authenticate, createUserSession } from '../../../../lib/auth';
+import { createUserSession } from '../../../../lib/auth';
 import { ApiResponse, AuthUser } from '../../../../lib/types';
-import { verifyPassword } from '../../../../lib/dataStore';
+import { dataStore, verifyPassword } from '../../../../lib/dataStore';
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,33 +15,38 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
-    // Authenticate user
-    const user = await authenticate(email, password);
-    
-    if (!user) {
+    // Find user by email
+    const existingUser = dataStore.getUserByEmail(email);
+    if (!existingUser) {
       return NextResponse.json<ApiResponse>({
         success: false,
         error: 'Invalid credentials',
       }, { status: 401 });
     }
 
-    // Check password
-    if (!user.password) {
+    // Verify password
+    const isPasswordValid = await verifyPassword(password, existingUser.password);
+    if (!isPasswordValid) {
       return NextResponse.json<ApiResponse>({
         success: false,
         error: 'Invalid credentials',
       }, { status: 401 });
     }
-    
-    const isPasswordValid = await verifyPassword(password, user.password);
-    
+
     // Create session
-    await createUserSession(user.id);
+    await createUserSession(existingUser.id);
+
+    const authUser: AuthUser = {
+      id: existingUser.id,
+      name: existingUser.name,
+      email: existingUser.email,
+      role: existingUser.role,
+    };
 
     return NextResponse.json<ApiResponse<AuthUser>>({
       success: true,
       message: 'Login successful',
-      data: user,
+      data: authUser,
     });
 
   } catch (error) {

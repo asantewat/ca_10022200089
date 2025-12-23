@@ -49,12 +49,12 @@ class DataStore {
     // Initialize with sample products (Ghana-focused e-commerce)
     const sampleProducts: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>[] = [
       {
-        name: 'Samsung Galaxy A54 5G',
+        name: ' Active Noise Cancelling Wireless Headphones',
         description: 'Latest smartphone with excellent camera and long battery life. Perfect for capturing memories and staying connected.',
-        price: 2800.00, // GHS
+        price: 800.00, // GHS
         currency: 'GHS',
-        category: 'Electronics',
-        image: 'https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500',
+        category: 'Headphones',
+        image: '/images/headphones-1.jpg',
         rating: 4.5,
         numReviews: 128,
         countInStock: 15,
@@ -64,52 +64,52 @@ class DataStore {
         description: 'Reliable laptop for work and entertainment. Intel Core i5, 8GB RAM, 256GB SSD.',
         price: 4200.00, // GHS
         currency: 'GHS',
-        category: 'Electronics',
-        image: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500&q=80&auto=format&fit=crop&crop=entropy',
+        category: 'Laptops',
+        image: '/images/laptop-1.webp',
         rating: 4.3,
         numReviews: 89,
         countInStock: 8,
       },
       {
-        name: 'African Print Kente Shirt',
-        description: 'Beautiful traditional Kente print shirt. Made with high-quality African fabric. Available in various sizes.',
+        name: 'JBL Flip 6',
+        description: 'JBL Flip 6 is IP67 waterproof and dustproof, so you can bring your speaker anywhere.',
         price: 180.00, // GHS
         currency: 'GHS',
-        category: 'Fashion',
-        image: 'https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&q=80&auto=format&fit=crop&crop=entropy',
+        category: 'Speakers',
+        image: '/images/speaker-4.webp',
         rating: 4.8,
         numReviews: 95,
         countInStock: 25,
       },
       {
-        name: 'Adinkra Symbol Wall Art',
-        description: 'Handcrafted wooden wall art featuring traditional Adinkra symbols. Perfect for home decoration.',
+        name: 'iPhone 16',
+        description: 'Innovative design for ultimate performance and battery',
         price: 320.00, // GHS
         currency: 'GHS',
         category: 'Home & Decor',
-        image: 'https://images.unsplash.com/photo-1519710164239-da123dc03ef4?w=500&q=80&auto=format&fit=crop&crop=entropy',
+        image: '/images/phone-1.webp',
         rating: 4.6,
         numReviews: 42,
         countInStock: 12,
       },
       {
-        name: 'Pure Shea Butter (500g)',
-        description: 'Raw, unrefined shea butter from northern Ghana. Perfect for skincare and hair care.',
-        price: 45.00, // GHS
+        name: '3D Thudercloud LED',
+        description: 'Cloud Light Multicolor Lightning Changing, 3D Thundercloud LED Light Cotton Lightning Cloud Colorful Atmosphere Night Light, DIY Creative Cloud Lights for Bedroom Gaming Room Indoor, 16 Feet',
+        price: 95.00, // GHS
         currency: 'GHS',
-        category: 'Health & Beauty',
-        image: 'https://images.unsplash.com/photo-1570554886111-e80fcca6a029?w=500',
+        category: 'LED Lights',
+        image: '/images/led-1.jpg',
         rating: 4.9,
         numReviews: 203,
         countInStock: 50,
       },
       {
-        name: 'Ghanaian Cocoa Powder (1kg)',
-        description: 'Premium quality cocoa powder from Ghana. Rich flavor perfect for baking and beverages.',
-        price: 85.00, // GHS
+        name: 'Samsung Galaxy S8',
+        description: '128GB, Expandable up to 1.5TB via microSD card',
+        price: 850.00, // GHS
         currency: 'GHS',
-        category: 'Food & Beverages',
-        image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=500',
+        category: 'Phones',
+        image: '/images/phone-5.webp',
         rating: 4.7,
         numReviews: 156,
         countInStock: 30,

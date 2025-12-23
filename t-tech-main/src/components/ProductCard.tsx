@@ -33,7 +33,7 @@ export function ProductCard({ product }: ProductCardProps) {
             alt={product.name}
             width={300}
             height={200}
-            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-200"
+            className="w-full h-80 object-cover group-hover:scale-105 transition-transform duration-200"
           />
           {product.countInStock < 10 && product.countInStock > 0 && (
             <Badge variant="destructive" className="absolute top-2 right-2">

@@ -62,9 +62,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       const result = await response.json();
       if (result.success && result.data) {
-        setUser(result.data.user);
-        setToken(result.data.accessToken);
-        localStorage.setItem('accessToken', result.data.accessToken);
+        // API returns the authenticated user as `data` (no nested `user` or accessToken)
+        setUser(result.data);
+        setToken(null);
+        localStorage.removeItem('accessToken');
       } else {
         throw new Error(result.error || 'Login failed');
       }

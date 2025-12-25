@@ -11,12 +11,12 @@ export function Navbar() {
   const { user, logout } = useAuth();
   const { getItemCount } = useCart();
   const categories = [
-    { label: 'Phones', value: 'Mobile' },
-    { label: 'Laptops', value: 'Computers' },
-    { label: 'Headphones', value: 'Audio' },
-    { label: 'Speakers', value: 'Audio' },
-    { label: 'LED Lights', value: 'Electronics' },
-    { label: 'Fridges', value: 'Home & Decor' },
+    { label: 'Phones', value: 'Phones' },
+    { label: 'Laptops', value: 'Laptops' },
+    { label: 'Headphones', value: 'Headphones' },
+    { label: 'Speakers', value: 'Speakers' },
+    { label: 'LED Lights', value: 'LED Lights' },
+    { label: 'Home & Decor', value: 'Home & Decor' },
   ];
 
   return (

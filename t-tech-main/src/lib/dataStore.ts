@@ -86,7 +86,7 @@ class DataStore {
         description: 'Innovative design for ultimate performance and battery',
         price: 320.00, // GHS
         currency: 'GHS',
-        category: 'Home & Decor',
+        category: 'Phones',
         image: '/images/phone-1.webp',
         rating: 4.6,
         numReviews: 42,

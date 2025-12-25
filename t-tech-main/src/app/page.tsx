@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { useAuth } from '../contexts/AuthContext';
 import { Navbar } from '../components/Navbar';
 import { ProductCard } from '../components/ProductCard';
 import { Footer } from '../components/Footer';
@@ -12,6 +13,7 @@ import Link from 'next/link';
 export default function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
+    const { user } = useAuth();
 
   useEffect(() => {
     fetchProducts();
@@ -52,11 +54,13 @@ export default function HomePage() {
                   Shop Now
                 </Button>
               </Link>
-              <Link href="/auth/register">
-                <Button size="lg" className="text-lg px-8 bg-black text-white hover:opacity-90">
-                  Sign Up Today
-                </Button>
-              </Link>
+                {!user && (
+                  <Link href="/auth/register">
+                    <Button size="lg" className="text-lg px-8 bg-black text-white hover:opacity-90">
+                      Sign Up Today
+                    </Button>
+                  </Link>
+                )}
             </div>
           </div>
         </div>

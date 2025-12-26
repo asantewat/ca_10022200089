@@ -57,20 +57,35 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include', // Include cookies
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ email: email.toLowerCase().trim(), password }),
       });
       
-      const result = await response.json();
+      let result;
+      try {
+        result = await response.json();
+      } catch (jsonError) {
+        // If JSON parsing fails, throw a network error
+        throw new Error('Network error. Please try again.');
+      }
+      
+      if (!response.ok) {
+        throw new Error(result.error || 'Login failed. Please check your credentials.');
+      }
+      
       if (result.success && result.data) {
         // API returns the authenticated user as `data` (no nested `user` or accessToken)
         setUser(result.data);
         setToken(null);
         localStorage.removeItem('accessToken');
       } else {
-        throw new Error(result.error || 'Login failed');
+        throw new Error(result.error || 'Login failed. Please check your credentials.');
       }
-    } catch (error) {
-      throw error;
+    } catch (error: any) {
+      // If it's already an Error, throw it as-is, otherwise wrap it
+      if (error instanceof Error) {
+        throw error;
+      }
+      throw new Error(error?.message || 'Login failed. Please try again.');
     }
   };
 
@@ -109,6 +124,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setUser(null);
       setToken(null);
       localStorage.removeItem('accessToken');
+      // Redirect to home page immediately after logout
+      if (typeof window !== 'undefined') {
+        window.location.href = '/';
+      }
     }
   };
 

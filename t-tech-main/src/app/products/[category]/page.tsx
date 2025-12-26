@@ -11,7 +11,9 @@ import Link from 'next/link';
 
 export default function CategoryPage() {
   const params = useParams();
-  const category = Array.isArray(params.category) ? params.category[0] : params.category || '';
+  // Decode and trim the category parameter from URL
+  const rawCategory = Array.isArray(params.category) ? params.category[0] : params.category || '';
+  const category = rawCategory ? decodeURIComponent(rawCategory).trim() : '';
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -22,7 +24,9 @@ export default function CategoryPage() {
   const fetchProducts = async () => {
     try {
       setLoading(true);
-      const res = await fetch(`/api/products?category=${encodeURIComponent(category)}&limit=48`);
+      // Ensure category is properly encoded for the API call
+      const encodedCategory = encodeURIComponent(category);
+      const res = await fetch(`/api/products?category=${encodedCategory}&limit=48`);
       if (res.ok) {
         const data = await res.json();
         setProducts(data.success && data.data ? data.data.products : []);

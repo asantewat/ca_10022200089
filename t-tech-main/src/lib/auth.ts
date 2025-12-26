@@ -15,6 +15,9 @@ const COOKIE_OPTIONS = {
 // Get current user from session cookie
 export async function getCurrentUser(): Promise<AuthUser | null> {
   try {
+    // Ensure dataStore is initialized
+    await dataStore.ensureInitialized();
+
     const cookieStore = await cookies();
     const sessionId = cookieStore.get(SESSION_COOKIE_NAME)?.value;
     

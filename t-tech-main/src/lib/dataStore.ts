@@ -23,9 +23,22 @@ class DataStore {
   private orders: Map<string, Order> = new Map();
   private cartItems: Map<string, CartItem> = new Map();
   private sessions: Map<string, Session> = new Map();
+  private initialized: Promise<void>;
+  private instanceId: string; // Track instance to see if it's being recreated
 
   constructor() {
-    this.initializeData();
+    this.instanceId = Math.random().toString(36).substring(7);
+    console.log('DataStore instance created with ID:', this.instanceId);
+    this.initialized = this.initializeData();
+  }
+  
+  getInstanceId(): string {
+    return this.instanceId;
+  }
+
+  // Ensure data is initialized before use
+  async ensureInitialized(): Promise<void> {
+    await this.initialized;
   }
 
   private async initializeData() {
@@ -44,7 +57,9 @@ class DataStore {
     };
     
     this.users.set(adminId, adminUser);
-    this.users.set(adminUser.email, adminUser); // Also store by email for lookup
+    this.users.set(adminUser.email.toLowerCase(), adminUser); // Also store by email for lookup (lowercase)
+    
+    console.log('DataStore initialized. Admin user created:', adminUser.email);
 
     // Initialize with sample products (Ghana-focused e-commerce)
     const sampleProducts: Omit<Product, 'id' | 'createdAt' | 'updatedAt'>[] = [
@@ -145,16 +160,28 @@ class DataStore {
     };
     
     this.users.set(userId, user);
-    this.users.set(user.email, user); // Also store by email
+    this.users.set(user.email.toLowerCase(), user); // Also store by email (lowercase)
+    console.log('User created:', user.email, 'Stored with key:', user.email.toLowerCase());
     return user;
   }
 
   getUserByEmail(email: string): User | undefined {
-    return this.users.get(email.toLowerCase());
+    const normalizedEmail = email.toLowerCase();
+    const user = this.users.get(normalizedEmail);
+    console.log(`getUserByEmail: Looking for "${normalizedEmail}", found:`, user ? user.email : 'null');
+    console.log(`Total users in store: ${this.users.size}, Keys:`, Array.from(this.users.keys()).filter(k => !k.includes('-')));
+    return user;
   }
 
   getUserById(id: string): User | undefined {
     return this.users.get(id);
+  }
+  
+  // Debug method to get all user emails
+  getAllUserEmails(): string[] {
+    return Array.from(this.users.values())
+      .filter(u => u.email) // Filter out entries that are keyed by ID
+      .map(u => u.email);
   }
 
   // Product methods
@@ -329,8 +356,14 @@ class DataStore {
   }
 }
 
-// Export singleton instance
-export const dataStore = new DataStore();
+// Use global variable to persist dataStore across Next.js serverless function invocations
+// This is necessary because Next.js can re-evaluate modules between requests
+declare global {
+  var __dataStore: DataStore | undefined;
+}
+
+// Export singleton instance - use global to persist across serverless invocations
+export const dataStore = globalThis.__dataStore || (globalThis.__dataStore = new DataStore());
 
 // Format currency for Ghana cedis
 export function formatCurrency(amount: number): string {

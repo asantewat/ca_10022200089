@@ -2,8 +2,10 @@
 
 import Link from 'next/link';
 import { Facebook, Twitter, Instagram, Mail, Phone, MapPin } from 'lucide-react';
+import { useAuth } from '../contexts/AuthContext';
 
 export function Footer() {
+  const { isAdmin } = useAuth();
   return (
     <footer className="bg-gray-900 text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -94,9 +96,11 @@ export function Footer() {
               <Link href="/support" className="text-gray-300 hover:text-white text-sm transition-colors">
                 Support
               </Link>
-              <Link href="/admin" className="text-yellow-300 hover:text-yellow-200 text-sm transition-colors font-semibold">
-                Admin
-              </Link>
+              {isAdmin && (
+                <Link href="/admin" className="text-yellow-300 hover:text-yellow-200 text-sm transition-colors font-semibold">
+                  Admin
+                </Link>
+              )}
             </div>
           </div>
         </div>

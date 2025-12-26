@@ -5,6 +5,10 @@ import { ApiResponse, AuthUser } from '../../../../lib/types';
 
 export async function POST(request: NextRequest) {
   try {
+    // Ensure dataStore is initialized
+    await dataStore.ensureInitialized();
+    console.log('DataStore instance ID (register):', dataStore.getInstanceId());
+
     const { name, email, password } = await request.json();
 
     // Validate input
@@ -32,8 +36,9 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
-    // Check if user already exists
-    const existingUser = dataStore.getUserByEmail(email);
+    // Check if user already exists (normalize email)
+    const normalizedEmail = email.toLowerCase().trim();
+    const existingUser = dataStore.getUserByEmail(normalizedEmail);
     if (existingUser) {
       return NextResponse.json<ApiResponse>({
         success: false,
@@ -43,6 +48,15 @@ export async function POST(request: NextRequest) {
 
     // Create new user
     const user = await dataStore.createUser({ name, email, password });
+    console.log('User registered:', user.email, 'ID:', user.id);
+
+    // Verify user can be retrieved
+    const verifyUser = dataStore.getUserByEmail(normalizedEmail);
+    if (!verifyUser) {
+      console.error('ERROR: User was created but cannot be retrieved!');
+    } else {
+      console.log('User verification successful:', verifyUser.email);
+    }
 
     // Create session for the new user
     await createUserSession(user.id);

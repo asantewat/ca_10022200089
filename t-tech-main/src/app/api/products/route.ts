@@ -15,8 +15,9 @@ export async function GET(request: NextRequest) {
 
     // Filter by category
     if (category && category !== 'all') {
+      const categoryFilter = decodeURIComponent(category).trim().toLowerCase();
       allProducts = allProducts.filter(product => 
-        product.category.toLowerCase() === category.toLowerCase()
+        product.category.trim().toLowerCase() === categoryFilter
       );
     }
 

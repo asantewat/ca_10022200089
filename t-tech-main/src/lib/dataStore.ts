@@ -177,11 +177,38 @@ class DataStore {
     return this.users.get(id);
   }
   
+  // Get all users (excluding email-keyed entries, only return actual user objects)
+  getAllUsers(): User[] {
+    // Users are stored both by ID and by email
+    // We only want to return unique user objects (those keyed by ID, not email)
+    const userMap = new Map<string, User>();
+    for (const [key, user] of this.users.entries()) {
+      // If the key is a user ID (contains timestamp and random), it's a user object
+      // If the key is an email, skip it (it's a duplicate reference)
+      if (user.id && key === user.id) {
+        userMap.set(user.id, user);
+      }
+    }
+    return Array.from(userMap.values());
+  }
+  
   // Debug method to get all user emails
   getAllUserEmails(): string[] {
-    return Array.from(this.users.values())
-      .filter(u => u.email) // Filter out entries that are keyed by ID
-      .map(u => u.email);
+    return this.getAllUsers().map(u => u.email);
+  }
+  
+  // Debug method to print all users to console
+  printAllUsers(): void {
+    const users = this.getAllUsers();
+    console.log('\n=== ALL REGISTERED USERS ===');
+    console.log(`Total users: ${users.length}\n`);
+    users.forEach((user, index) => {
+      console.log(`${index + 1}. ${user.name} (${user.email})`);
+      console.log(`   Role: ${user.role}`);
+      console.log(`   ID: ${user.id}`);
+      console.log(`   Created: ${user.createdAt.toLocaleString()}\n`);
+    });
+    console.log('============================\n');
   }
 
   // Product methods

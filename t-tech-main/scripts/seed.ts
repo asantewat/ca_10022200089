@@ -61,9 +61,9 @@ const seedDatabase = async () => {
     await adminUser.save();
 
     const sampleUser = new User({
-      name: 'John Doe',
-      email: 'john@example.com',
-      password: 'password123',
+      name: 'Margery Andah',
+      email: 'margery@gmail.com',
+      password: 'Margery',
       role: 'USER',
     });
     await sampleUser.save();
